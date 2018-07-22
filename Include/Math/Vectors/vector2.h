@@ -25,6 +25,11 @@ static vector2* vector2_init(float _x, float _y) {
 	return newVector;
 }
 
+static vector2 vector2_create(float _x, float _y) {
+	vector2 vec = { _x, _y };
+	return vec;
+}
+
 /// Copy the values of a vector and create a new one
 static vector2* vector2_copy(const vector2 v) {
 	vector2* newVector = vector2_init(v.x, v.y);
@@ -128,3 +133,15 @@ static void vector2_printInt(const vector2 v) {
 	vector2_printFormat(v, 0);
 }
 #pragma endregion
+
+#ifdef  VECTOR3
+static vector2 vector2_castVector3(const vector3 v) {
+	return vector2_create(v.x, v.y);
+}
+#endif //  VECTOR3
+
+#ifdef  VECTOR4
+static vector2 vector2_castVector4(const vector4 v) {
+	return vector2_create(v.x, v.y);
+}
+#endif //  VECTOR3

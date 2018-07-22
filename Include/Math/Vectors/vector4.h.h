@@ -30,9 +30,20 @@ static vector4* vector4_init(float _x, float _y, float _z, float _w) {
 	return newVector;
 }
 
+static vector4 vector4_create(float _x, float _y, float _z, float _w) {
+	vector4 vec = { _x, _y, _z, _w };
+	return vec;
+}
+
 /// Allocate and return a new vector where w = 1
-static vector4* vector4_v3Init(float _x, float _y, float _z) {
+static vector4* vector4_v3init(float _x, float _y, float _z) {
 	return vector4_init(_x, _y, _z, 1);
+}
+
+/// Allocate and return a new vector where w = 1
+static vector4 vector4_v3create(float _x, float _y, float _z) {
+	vector4 vec = { _x, _y, _z, 1 };
+	return vec;
 }
 
 /// Copy the values of a vector and create a new one
@@ -63,9 +74,9 @@ static void vector4_normalize(vector4* v) {
 }
 
 /// Get the normal values of a vector
-static vector4* vector4_normal(const vector4 v) {
-	vector4* newVector = vector4_init(v.x, v.y, v.z, v.w);
-	vector4_normalize(newVector);
+static vector4 vector4_normal(const vector4 v) {
+	vector4 newVector = vector4_create(v.x, v.y, v.z, v.w);
+	vector4_normalize(&newVector);
 	return newVector;
 }
 
@@ -131,9 +142,16 @@ static void vector4_printInt(const vector4 v) {
 }
 #pragma endregion
 
+
+#ifdef VECTOR2
+static vector4 vector2_castVector4(const vector2 v) {
+	return vector4_create(v.x, v.y, 0, 1);
+}
+#endif // VECTOR2
+
 /// Functions that requre VECTOR2 to be defined
 #ifdef VECTOR3
-static vector4* vector3_castVector4(const vector3 v) {
-	return vector4_init(v.x, v.y, v.z, 1);
+static vector4 vector3_castVector4(const vector3 v) {
+	return vector4_create(v.x, v.y, v.z, 1);
 }
 #endif // VECTOR3

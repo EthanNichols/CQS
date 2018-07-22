@@ -28,9 +28,19 @@ static vector3* vector3_init(float _x, float _y, float _z) {
 	return newVector;
 }
 
+static vector3 vector3_create(float _x, float _y, float _z) {
+	vector3 vec = { _x, _y, _z };
+	return vec;
+}
+
 /// Allocate and return a new vector where z = 1
-static vector3* vector3_v2Init(float _x, float _y) {
+static vector3* vector3_v2init(float _x, float _y) {
 	return vector3_init(_x, _y, 1);
+}
+
+static vector3 vector3_v2create(float _x, float _y) {
+	vector3 vec = { _x, _y, 1 };
+	return vec;
 }
 
 /// Copy the values of a vector and create a new one
@@ -125,7 +135,13 @@ static void vector3_printInt(const vector3 v) {
 
 /// Functions that requre VECTOR2 to be defined
 #ifdef VECTOR2
-static vector3* vector3_castvector2(const vector2 v) {
-	return vector3_init(v.x, v.y, 1);
+static vector3 vector3_castvector2(const vector2 v) {
+	return vector3_create(v.x, v.y, 1);
 }
 #endif // VECTOR2
+
+#ifdef VECTOR4
+static vector3 vector3_castvector4(const vector4 v) {
+	return vector3_create(v.x, v.y, v.z);
+}
+#endif
