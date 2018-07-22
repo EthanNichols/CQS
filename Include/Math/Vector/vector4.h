@@ -19,6 +19,23 @@ typedef struct
 	float w;
 } vector4;
 
+#pragma region Predefined vector4s
+static vector4 vector4_one = {1, 1, 1, 1};
+static vector4 vector4_zero = {0, 0, 0, 0};
+
+static vector4 vector4_left = {-1, 0, 0, 0};
+static vector4 vector4_right = {1, 0, 0, 0};
+
+static vector4 vector4_up = {0, 1, 0, 0};
+static vector4 vector4_down = {0, -1, 0, 0};
+
+static vector4 vector4_forward = {0, 0, 1, 0};
+static vector4 vector4_backward = {0, 0, -1, 0};
+
+static vector4 vector4_ana = {0, 0, 0, 1};
+static vector4 vector4_kata = {0, 0, 0, -1};
+#pragma endregion
+
 #pragma region vector4 constructors/destructor functions
 /// Allocate and return a new vector
 static vector4* vector4_init(float _x, float _y, float _z, float _w) {
@@ -30,6 +47,7 @@ static vector4* vector4_init(float _x, float _y, float _z, float _w) {
 	return newVector;
 }
 
+/// Create and return a new vector (No allocation)
 static vector4 vector4_create(float _x, float _y, float _z, float _w) {
 	vector4 vec = { _x, _y, _z, _w };
 	return vec;
@@ -40,7 +58,7 @@ static vector4* vector4_v3init(float _x, float _y, float _z) {
 	return vector4_init(_x, _y, _z, 1);
 }
 
-/// Allocate and return a new vector where w = 1
+/// Allocate and return a new vector where w = 1 (No allocation)
 static vector4 vector4_v3create(float _x, float _y, float _z) {
 	vector4 vec = { _x, _y, _z, 1 };
 	return vec;
@@ -132,6 +150,7 @@ static void vector4_printFormat(const vector4 v, int format) {
 	printf("{%.*f, %.*f, %.*f, %.*f}", format, v.x, format, v.y, format, v.z, format, v.w);
 }
 
+/// Print vector values as float that aren't formatted
 static void vector4_printFloat(const vector4 v) {
 	printf("{%f, %f, %f, %f}", v.x, v.y, v.z, v.w);
 }
@@ -142,15 +161,15 @@ static void vector4_printInt(const vector4 v) {
 }
 #pragma endregion
 
-
 #ifdef VECTOR2
+/// Cast a vector2 to a vector4 z = 1 w = 1
 static vector4 vector2_castVector4(const vector2 v) {
-	return vector4_create(v.x, v.y, 0, 1);
+	return vector4_create(v.x, v.y, 1, 1);
 }
 #endif // VECTOR2
 
-/// Functions that requre VECTOR2 to be defined
 #ifdef VECTOR3
+/// Cast a vector3 to a vector4 w = 1
 static vector4 vector3_castVector4(const vector3 v) {
 	return vector4_create(v.x, v.y, v.z, 1);
 }

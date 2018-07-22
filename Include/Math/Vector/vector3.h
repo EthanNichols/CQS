@@ -18,6 +18,20 @@ typedef struct
 	float z;
 } vector3;
 
+#pragma region Predefined vector3s
+static vector3 vector3_one = {1, 1, 1};
+static vector3 vector3_zero = {0, 0, 0};
+
+static vector3 vector3_left = {-1, 0, 0};
+static vector3 vector3_right = {1, 0, 0};
+
+static vector3 vector3_up = {0, 1, 0};
+static vector3 vector3_down = {0, -1, 0};
+
+static vector3 vector3_forward = {0, 0, 1};
+static vector3 vector3_backward = {0, 0, -1};
+#pragma endregion
+
 #pragma region vector3 constructors/destructor functions
 /// Allocate and return a new vector
 static vector3* vector3_init(float _x, float _y, float _z) {
@@ -28,6 +42,7 @@ static vector3* vector3_init(float _x, float _y, float _z) {
 	return newVector;
 }
 
+/// Create and return a new vector (No allocation)
 static vector3 vector3_create(float _x, float _y, float _z) {
 	vector3 vec = { _x, _y, _z };
 	return vec;
@@ -38,6 +53,7 @@ static vector3* vector3_v2init(float _x, float _y) {
 	return vector3_init(_x, _y, 1);
 }
 
+/// Create and return a new vector where z = 1 (No allocation)
 static vector3 vector3_v2create(float _x, float _y) {
 	vector3 vec = { _x, _y, 1 };
 	return vec;
@@ -123,6 +139,7 @@ static void vector3_printFormat(const vector3 v, int format) {
 	printf("{%.*f, %.*f, %.*f}", format, v.x, format, v.y, format, v.z);
 }
 
+/// Print vector values as float that aren't formatted
 static void vector3_printFloat(const vector3 v) {
 	printf("{%f, %f, %f}", v.x, v.y, v.z);
 }
@@ -135,12 +152,14 @@ static void vector3_printInt(const vector3 v) {
 
 /// Functions that requre VECTOR2 to be defined
 #ifdef VECTOR2
+/// Cast a vector2 to a vector3 z = 1
 static vector3 vector3_castvector2(const vector2 v) {
 	return vector3_create(v.x, v.y, 1);
 }
 #endif // VECTOR2
 
 #ifdef VECTOR4
+/// Cast a vector4 to a vector3
 static vector3 vector3_castvector4(const vector4 v) {
 	return vector3_create(v.x, v.y, v.z);
 }

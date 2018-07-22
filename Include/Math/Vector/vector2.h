@@ -16,6 +16,17 @@ typedef struct
 	float y;
 } vector2;
 
+#pragma region Predefined vector2s
+static vector2 vector2_one = {1, 1};
+static vector2 vector2_zero = {0, 0};
+
+static vector2 vector2_left = {-1, 0};
+static vector2 vector2_right = {1, 0};
+
+static vector2 vector2_up = {0, 1};
+static vector2 vector2_down = {0, -1};
+#pragma endregion
+
 #pragma region Vector2 constructors/destructor functions
 /// Allocate and return a new vector
 static vector2* vector2_init(float _x, float _y) {
@@ -25,6 +36,7 @@ static vector2* vector2_init(float _x, float _y) {
 	return newVector;
 }
 
+/// Create and return a new vector (No allocation)
 static vector2 vector2_create(float _x, float _y) {
 	vector2 vec = { _x, _y };
 	return vec;
@@ -124,6 +136,7 @@ static void vector2_printFormat(const vector2 v, int format) {
 	printf("{%.*f, %.*f}", format, v.x, format, v.y);
 }
 
+/// Print vector values as floats that aren't formatted
 static void vector2_printFloat(const vector2 v) {
 	printf("{%f, %f}", v.x, v.y);
 }
@@ -135,12 +148,14 @@ static void vector2_printInt(const vector2 v) {
 #pragma endregion
 
 #ifdef  VECTOR3
+/// Cast a vector3 to a vector2
 static vector2 vector2_castVector3(const vector3 v) {
 	return vector2_create(v.x, v.y);
 }
 #endif //  VECTOR3
 
 #ifdef  VECTOR4
+/// Cast a vector4 to a vector4
 static vector2 vector2_castVector4(const vector4 v) {
 	return vector2_create(v.x, v.y);
 }
