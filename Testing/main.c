@@ -1,13 +1,12 @@
 #include <conio.h>
 
-#include "../Include/Math/Vectors/vector2.h"
+#include "../Include/Math/Matrix/matrix2x2.h"
 
 int main(int argc, char* argv[]) {
 
-	vector2* vec = vector2_init(13.245, 10);
-	vector2_printInt(*vec);
-	vector2_printFloat(*vec);
-	vector2_printFormat(*vec, 2);
+	matrix2x2 mat = matrix2x2_identity;
+
+	matrix2x2_printInt(mat);
 
 	_getch();
 

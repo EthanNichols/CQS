@@ -5,11 +5,6 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testing", "Testing\Testing.vcxproj", "{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8409E6EF-CAD7-43A5-9826-D5F0720FF7E6}"
-	ProjectSection(SolutionItems) = preProject
-		Include\Math\Vectors\vector2.h = Include\Math\Vectors\vector2.h
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
