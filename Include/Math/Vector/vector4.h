@@ -150,7 +150,7 @@ static void vector4_printFormat(const vector4 v, int format) {
 	printf("{%.*f, %.*f, %.*f, %.*f}", format, v.x, format, v.y, format, v.z, format, v.w);
 }
 
-/// Print vector values as float that aren't formatted
+/// Print vector values as floats that aren't formatted
 static void vector4_printFloat(const vector4 v) {
 	printf("{%f, %f, %f, %f}", v.x, v.y, v.z, v.w);
 }

@@ -139,7 +139,7 @@ static void vector3_printFormat(const vector3 v, int format) {
 	printf("{%.*f, %.*f, %.*f}", format, v.x, format, v.y, format, v.z);
 }
 
-/// Print vector values as float that aren't formatted
+/// Print vector values as floats that aren't formatted
 static void vector3_printFloat(const vector3 v) {
 	printf("{%f, %f, %f}", v.x, v.y, v.z);
 }
