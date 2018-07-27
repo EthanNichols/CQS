@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}</ProjectGuid>
-    <RootNamespace>Testing</RootNamespace>
+    <ProjectGuid>{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}</ProjectGuid>
+    <RootNamespace>Tracker</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -93,7 +93,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
@@ -106,7 +105,6 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
@@ -121,7 +119,6 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -140,7 +137,6 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

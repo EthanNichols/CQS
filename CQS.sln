@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testing", "Testing\Testing.vcxproj", "{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tracker", "Tracker\Tracker.vcxproj", "{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,12 +17,20 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x64.ActiveCfg = Debug|x64
 		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x64.Build.0 = Debug|x64
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x86.ActiveCfg = Debug|Win32
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x86.Build.0 = Debug|Win32
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x64.ActiveCfg = Release|x64
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x64.Build.0 = Release|x64
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x86.ActiveCfg = Release|Win32
-		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x86.Build.0 = Release|Win32
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x86.ActiveCfg = Debug|x64
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Debug|x86.Build.0 = Debug|x64
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x64.ActiveCfg = Debug|x64
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x64.Build.0 = Debug|x64
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x86.ActiveCfg = Debug|x64
+		{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}.Release|x86.Build.0 = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Debug|x64.ActiveCfg = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Debug|x64.Build.0 = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Debug|x86.ActiveCfg = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Debug|x86.Build.0 = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Release|x64.ActiveCfg = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Release|x64.Build.0 = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Release|x86.ActiveCfg = Debug|x64
+		{2FBC6574-DB5C-46BD-8CF5-D44C456ED386}.Release|x86.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

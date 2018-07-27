@@ -1,14 +1,24 @@
 #include <conio.h>
 
-#include "../Include/Math/Matrix/matrix.h"
+#include <stdio.h>
+#include <Windows.h>
+#include <stdbool.h>
+
+#include "../Include/Debug/Tracker.h"
 
 int main(int argc, char* argv[]) {
 
-	matrix* mat = matrix_init(8, 8);
-	matrix_identity(mat);
+	printf("hi");
 
-	matrix_printInt(*mat);
+	tracker_create();
+	tracker_create();
 
+	printf("hi");
+
+	_getch();
+
+	tracker_stop();
+	
 	_getch();
 
 	return 0;
