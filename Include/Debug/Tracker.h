@@ -1,147 +1,137 @@
-#pragma once
+#define __STDC_WANT_LIB_EXT1__ 1
+#define _XOPEN_SOURCE
 
-#include <windows.h>
-#include <tchar.h>
+#include <stdlib.h>
 #include <stdio.h>
-#include <strsafe.h>
+#include <string.h>
+#include <time.h>
 
-#define BUF_SIZE 2048
-#define FILE_PATH "Pipe.txt"
+#define TIME_STRING_LENGTH 32
+#define PATH_STRING_LENGTH 64
+#define INFO_STRING_LENGTH 512
+#define MSG_STRING_LENGTH 1024
+#define LOG_FILE_PATH "Log_Files/"
 
-static STARTUPINFO si;
-static PROCESS_INFORMATION pi;
-static SECURITY_ATTRIBUTES sa;
-static HANDLE childStdOut_r = NULL;
-static HANDLE childStdOut_w = NULL;
-static HANDLE childStdIn_r = NULL;
-static HANDLE childStdIn_w = NULL;
+#define LOG "Log"
+#define WARNING "Warning"
+#define ERROR "Error"
+#define INFO "Info"
+#define TYPE_SEPERATOR ": "
+#define TIME_SEPEARTOR " - "
 
-static HANDLE inputFile = NULL;
+static FILE* file;
+static char filePath[TIME_STRING_LENGTH];
+static char strTime[TIME_STRING_LENGTH];
 
-static TCHAR cmdLine[] = TEXT("Child");
-static TCHAR inputPipe[] = TEXT("Child");
+/// Get a formatted time for a timestamp
+static char* tracker_time() {
+	time_t t = time(NULL);
 
-static bool tracker_exists = false;
+	struct tm tmTime;
+	localtime_s(&tmTime, &t);
+	asctime_s(strTime, TIME_STRING_LENGTH, &tmTime);
 
-static void tracker_write() {
-	DWORD read = "";
-	DWORD write = "";
-	char cBuf[BUF_SIZE];
-	bool success = false;
+	strftime(strTime, TIME_STRING_LENGTH, "%D %H:%M:%S", &tmTime);
 
-	while (true)
-	{
-		success = ReadFile(inputFile, cBuf, BUF_SIZE, &read, NULL);
-
-		if (!success || read == 0 || !tracker_exists) break;
-
-		success = WriteFile(childStdIn_w, cBuf, read, &write, NULL);
-
-		if (!success || !tracker_exists) break;
-	}
-
-	CloseHandle(childStdIn_w);
+	return strTime;
 }
 
-static void tracker_read() {
-	DWORD read = "";
-	DWORD write = "";
-	char cBuf[BUF_SIZE];
-	bool success = false;
-	HANDLE parentStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+/// Get a custom formatted time
+static char* tracker_timeFormat(char* format) {
+	time_t t = time(NULL);
 
-	while (true)
-	{
-		success = ReadFile(childStdOut_r, cBuf, BUF_SIZE, &read, NULL);
+	struct tm tmTime;
+	localtime_s(&tmTime, &t);
+	asctime_s(strTime, TIME_STRING_LENGTH, &tmTime);
 
-		if (!success || read == 0 || !tracker_exists) break;
+	strftime(strTime, TIME_STRING_LENGTH, format, &tmTime);
 
-		success = WriteFile(parentStdOut, cBuf, read, &write, NULL);
-
-		if (!success || !tracker_exists) break;
-	}
+	return strTime;
 }
 
-static void tracker_stop() {
+/// Format the message with a time and message type before the message
+static char* tracker_formatMsg(const char* msgType, const char* msg) {
+	char formattedMsg[MSG_STRING_LENGTH];
+	char* strTime = tracker_time();
+	strcpy_s(formattedMsg, MSG_STRING_LENGTH, strTime);
+	strcat_s(formattedMsg, MSG_STRING_LENGTH, TIME_SEPEARTOR);
+	strcat_s(formattedMsg, MSG_STRING_LENGTH, msgType);
+	strcat_s(formattedMsg, MSG_STRING_LENGTH, TYPE_SEPERATOR);
+	strcat_s(formattedMsg, MSG_STRING_LENGTH, msg);
+	strcat_s(formattedMsg, MSG_STRING_LENGTH, "\n");
 
-	tracker_exists = false;
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
+	return formattedMsg;
 }
 
-static void tracker_startprocess() {
-
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-
-	si.cb = sizeof(STARTUPINFO);
-	si.hStdOutput = childStdOut_w;
-	si.hStdInput = childStdIn_r;
-	si.dwFlags |= STARTF_USESTDHANDLES;
-
-	inputFile = CreateFile(
-		FILE_PATH,
-		GENERIC_READ,
-		0,
-		NULL,
-		OPEN_EXISTING,
-		FILE_ATTRIBUTE_READONLY,
-		NULL);
-
-	if (CreateProcess(
-		"../_Binary/Tracker_d.exe",
-		cmdLine,
-		NULL,
-		NULL,
-		false,
-		CREATE_NEW_CONSOLE,
-		NULL,
-		NULL,
-		&si,
-		&pi
-	)) {
-	}
-	else if (CreateProcess(
-		"../_Binary/Tracker.exe",
-		cmdLine,
-		NULL,
-		NULL,
-		false,
-		CREATE_NEW_CONSOLE,
-		NULL,
-		NULL,
-		&si,
-		&pi)) {
-	}
-	else {
-		tracker_stop();
-
-		printf("The tracker exe does not exist\n");
-		printf("Build the tracker project\n");
-		printf("Or move the tracker exe to the build folder\n");
+/// Log a normal message
+static void tracker_log(const char* msg) {
+	if (file != NULL) {
+		fprintf(file, tracker_formatMsg(LOG, msg));
 	}
 }
 
-static void tracker_create() {
+/// Log a warning
+static void tracker_warning(const char* msg) {
+	if (file != NULL) {
+		fprintf(file, tracker_formatMsg(WARNING, msg));
+	}
+}
 
-	if (tracker_exists) {
-		printf("A tracker already exists!\n");
+/// Log and error
+static void tracker_error(const char* msg) {
+	if (file != NULL) {
+		fprintf(file, tracker_formatMsg(ERROR, msg));
+	}
+}
+
+/// Log information about the location of this function call
+/* Finish implementing later
+static void tracker_codeInfo(const char* file, const int line, const char* function, const char* msg) {
+	if (file != NULL) {
+
+		char fullMsg[INFO_STRING_LENGTH];
+		strcpy_s(fullMsg, INFO_STRING_LENGTH, file);
+		//strcat_s(fullMsg, INFO_STRING_LENGTH, line);
+		//strcat_s(fullMsg, INFO_STRING_LENGTH, function);
+		//strcat_s(fullMsg, INFO_STRING_LENGTH, msg);
+
+
+		fprintf(file, tracker_formatMsg(INFO, fullMsg));
+	}
+}
+*/
+
+/// Create and open a log file names to the current time
+/// One log file is created the first time this function is called in a program
+static void tracker_openFile(const char* fileName) {
+
+	if (file != NULL) {
+		tracker_warning("File has already been created, but a new file was going to be made");
 		return;
 	}
-	tracker_exists = true;
 
-	sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-	sa.bInheritHandle = true;
-	sa.lpSecurityDescriptor = NULL;
+	printf("Opening");
 
-	CreatePipe(&childStdOut_r, &childStdOut_w, &sa, 0);
-	//SetHandleInformation(childStdOut_r, HANDLE_FLAG_INHERIT, 0);
+	// Set the file path if there wasn't one already
+	if (filePath[0] == NULL) {
+		char fileNamePath[PATH_STRING_LENGTH];
+		strcpy_s(fileNamePath, PATH_STRING_LENGTH, LOG_FILE_PATH);
+		strcat_s(fileNamePath, PATH_STRING_LENGTH, tracker_timeFormat("%d.%m.%y %H.%M.%S "));
+		strcat_s(fileNamePath, PATH_STRING_LENGTH, fileName);
 
-	CreatePipe(&childStdOut_r, &childStdOut_w, &sa, 0);
-	//SetHandleInformation(childStdIn_r, HANDLE_FLAG_INHERIT, 0);
+		strcpy_s(filePath, PATH_STRING_LENGTH, fileNamePath);
+	}
 
-	tracker_startprocess();
-	tracker_write();
-	tracker_read();
+	fopen_s(&file, filePath, "w");
+
+	tracker_log("File Opened");
+}
+
+/// Close the file that has been logged to
+static void tracker_closeFile() {
+	if (file != NULL) {
+		tracker_log("File Closed");
+		fclose(file);
+		file = NULL;
+	}
 }
