@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{32D3F7F0-91E2-4FB2-B6F0-12A14DB03C25}</ProjectGuid>
+    <ProjectGuid>{EAF5CC6A-E3F5-4069-B457-A0D323EC7CFE}</ProjectGuid>
     <RootNamespace>Testing</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -97,6 +97,7 @@
     </ClCompile>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
+mkdir "$(SolutionDir)_Binary\Log_Files"
 copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -110,6 +111,7 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
+mkdir "$(SolutionDir)_Binary\Log_Files"
 copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -129,6 +131,7 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </Link>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
+mkdir "$(SolutionDir)_Binary\Log_Files"
 copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -148,11 +151,16 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </Link>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)_Binary"
+mkdir "$(SolutionDir)_Binary\Log_Files"
 copy "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)_Binary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="test.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

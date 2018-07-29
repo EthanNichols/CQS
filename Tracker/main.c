@@ -1,21 +1,17 @@
-#include <stdbool.h>
+#include <conio.h>
+
 #include <stdio.h>
+#include <Windows.h>
+#include <stdbool.h>
+
+#include "../Include/Math/Vector/vectors.h"
+#include "test.h"
 
 int main(int argc, char* argv[]) {
-	printf(argv[0]);
-	while (true);
+
+	_getch();
+	
+	_getch();
+
 	return 0;
 }
-
-/*
-void read_from_pipe(int file) {
-	FILE* stream;
-	int c;
-	stream = fdopen(file, "r");
-	while ((c = fgetc(stream)) != EOF) {
-		putchar(c);
-	}
-
-	fclose(stream);
-}
-*/

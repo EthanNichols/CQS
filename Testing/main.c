@@ -1,25 +1,36 @@
-#include <conio.h>
 
-#include <stdio.h>
-#include <Windows.h>
-#include <stdbool.h>
-
-#include "../Include/Debug/Tracker.h"
+#include "Debug\Tracker.h"
 
 int main(int argc, char* argv[]) {
 
-	printf("hi");
+	tracker_openFile("Log.txt");
 
-	tracker_create();
-	tracker_create();
+	tracker_openFile("Log.txt");
 
-	printf("hi");
+	printf("Hello1");
+
 
 	_getch();
 
-	tracker_stop();
+	printf("Hello2");
+
+	tracker_log("Hello Test");
+
+	tracker_closeFile();
+
+	tracker_log("Hello Test");
 	
 	_getch();
+
+	tracker_openFile("Name");
+
+	tracker_log("Hello Test");
+
+	printf("Hello3");
+
+	_getch();
+
+	tracker_closeFile();
 
 	return 0;
 }
